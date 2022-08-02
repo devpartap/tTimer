@@ -1,7 +1,12 @@
 #include <iostream>
 #include <fstream>
+#include <thread>
+#include "timer.h"
 
 int main()
 {
-    std::cout << "cli" << std::endl;
+
+    timer test;
+    std::cout << test << std::endl;
+    
 }
