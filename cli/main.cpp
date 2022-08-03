@@ -1,12 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <thread>
+#include <chrono>
 #include "timer.h"
 
 int main()
 {
-
-    timer test;
-    std::cout << test << std::endl;
-    
+    varTime timee;
+    timee.stcount();
+    std::cout << timee << std::endl;
 }
+
+
