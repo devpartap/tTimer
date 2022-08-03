@@ -7,7 +7,6 @@ public:
     short hrs;
     short min;
     short sec;
-    bool count;
 
 public: 
     timer();
@@ -21,12 +20,8 @@ public:
 
 class varTime : public timer
 {
-   std::chrono::_V2::system_clock::time_point start;
+   std::chrono::_V2::system_clock::time_point start = std::chrono::system_clock::now();
 public:
-
-
-    void addsec(const unsigned int && toadd);
-    void stcount();
-
+    varTime(const short && h, const short && m, const short && s);
     friend std::ostream& operator<<(std::ostream & os,varTime & obj);
 };
