@@ -13,15 +13,27 @@ public:
     timer(short hr, short mn, short sc);
     ~timer();
 
-    timer operator+(timer & obj);
+    timer operator+(const timer &obj);
+    std::string operator-(const timer & obj);
 
-    friend std::ostream& operator<<(std::ostream & os,timer & obj);
+    void synctime();
+
+    friend std::ostream& operator<<(std::ostream & os,const timer & obj);
 };
 
 class varTime : public timer
 {
-   std::chrono::_V2::system_clock::time_point start = std::chrono::system_clock::now();
+    bool ifcounting = true;
+    std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
 public:
+    varTime();
     varTime(const short && h, const short && m, const short && s);
-    friend std::ostream& operator<<(std::ostream & os,varTime & obj);
+
+    std::string operator-(varTime & obj);
+
+    friend std::ostream& operator<<(std::ostream & os,const varTime & obj);
+
+    void count();
+    void stop();
+    void update();
 };

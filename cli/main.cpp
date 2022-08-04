@@ -5,12 +5,27 @@
 #include "timer.h"
 
 using namespace std::chrono_literals;
-int main()
+
+void state(varTime *vt)
 {
-    varTime tim(1,1,1);
     while (true)
     {
-        std::this_thread::sleep_for(1s);
-        std::cout << tim << std::endl;
+        std::cin.get();
+        vt->stop();
+        std::cin.get();
+        vt->count();
+    }   
+}
+int main()
+{
+    varTime studied;
+    varTime sittime;
+
+    std::thread ifenter(state,&studied); 
+    while(true){
+    std::cout << "Today Studied   :- " << studied << "  Not :- " << sittime - studied  << "  | Sit :- " << sittime << std::endl;
+    std::this_thread::sleep_for(1s);
+    system("clear");
     }
+
 }
