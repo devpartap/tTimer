@@ -1,12 +1,13 @@
 #include <iostream>
-#include <fstream>
 #include <thread>
-#include <chrono>
+
 #include "timer.h"
+#include "io_data.h"
+
 
 using namespace std::chrono_literals;
 
-void state(varTime *vt)
+std::string state(varTime *vt)
 {
     while (true)
     {
@@ -20,9 +21,12 @@ int main()
 {
     varTime studied;
     varTime sittime;
+    const std::string history = getdata();
 
-    std::thread ifenter(state,&studied); 
+    std::thread ifenter(state,&studied);
+     
     while(true){
+    std::cout << history << std::endl;
     std::cout << "Today Studied   :- " << studied << "  Not :- " << sittime - studied  << "  | Sit :- " << sittime << std::endl;
     std::this_thread::sleep_for(1s);
     system("clear");

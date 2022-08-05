@@ -1,5 +1,6 @@
+#include <chrono>
+
 #include "timer.h"
-#include <string>
 
 timer::timer()
     :hrs(0), min(0), sec(0)
