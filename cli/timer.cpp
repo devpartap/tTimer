@@ -89,10 +89,7 @@ std::ostream& operator<<(std::ostream & os,varTime & obj)
 void varTime::count()
 {
     ifcounting = true;
-    start = std::chrono::system_clock::now(); << 0 << obj.min); os << ":";
-    (obj.sec > 9) ? (os << obj.sec) : (os << 0 << obj.sec);
-    return os;
-}
+    start = std::chrono::system_clock::now();
 }
 void varTime::stop()
 {   

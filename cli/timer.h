@@ -14,7 +14,7 @@ public:
     ~timer();
 
     timer operator+(const timer &obj);
-    std::string operator-(const timer & obj);
+    timer operator-(const timer & obj);
 
     void synctime();
 
@@ -29,9 +29,9 @@ public:
     varTime();
     varTime(const short && h, const short && m, const short && s);
 
-    std::string operator-(varTime & obj);
+    timer operator-(varTime & obj);
 
-    friend std::ostream& operator<<(std::ostream & os,const varTime & obj);
+    friend std::ostream& operator<<(std::ostream & os,varTime & obj);
 
     void count();
     void stop();
