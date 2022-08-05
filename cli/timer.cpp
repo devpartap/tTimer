@@ -1,15 +1,6 @@
 #include "timer.h"
 #include <string>
 
-std::string twodigit(const short& data)
-{
-    if(data < 10)
-    {
-        return ("0" + std::to_string(data));
-    }
-    else {return std::to_string(data);}
-}
-
 timer::timer()
     :hrs(0), min(0), sec(0)
 { }
@@ -26,7 +17,7 @@ timer timer::operator+(const timer &obj)
     return timer(hrs + obj.hrs,min + obj.min,sec + obj.sec);
 }
 
-std::string timer::operator-(const timer & obj)
+timer timer::operator-(const timer & obj)
 {
     short h = 0,m = 0,s = 0;
     if(sec >= obj.sec)
@@ -59,18 +50,13 @@ std::string timer::operator-(const timer & obj)
         }
     }
 
-    return twodigit(h) + ":" + twodigit(m) + ":" + twodigit(s);
+    return timer(h,m,s);
 }
 
-std::string varTime::operator-(varTime& obj)
+timer varTime::operator-(varTime& obj)
 {
-    if(ifcounting){
-        update();
-    }
-    if(obj.ifcounting) {
-        obj.update();
-    }
-    
+    if(ifcounting) update();
+    if(obj.ifcounting) obj.update();
     return timer::operator-(obj);
 }
 
@@ -83,32 +69,30 @@ void timer::synctime()
 }
 std::ostream& operator<<(std::ostream & os,const timer & obj)
 {
-    os << twodigit(obj.hrs) << ":" << twodigit(obj.min) << ":" << twodigit(obj.sec);
+    (obj.hrs > 9) ? (os << obj.hrs) : (os << 0 << obj.hrs); os << ":";
+    (obj.min > 9) ? (os << obj.min) : (os << 0 << obj.min); os << ":";
+    (obj.sec > 9) ? (os << obj.sec) : (os << 0 << obj.sec);
     return os;
 }
 
 
-std::ostream& operator<<(std::ostream & os,const varTime & obj)
+std::ostream& operator<<(std::ostream & os,varTime & obj)
 {
-    if(!obj.ifcounting){
-        os << twodigit(obj.hrs) << ":" << twodigit(obj.min) << ":" << twodigit(obj.sec);
-        return os;
-    }
-
-    if(obj.sec == 59)
-   {
-    std::cout << ":";
-   }
-    const unsigned int data = (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - obj.start)).count();
-    unsigned int _min = obj.min + (data / 60);    
-    os << twodigit(obj.hrs + (_min / 60)) << ":" << twodigit(_min % 60) << ":" << twodigit((obj.sec + (data % 60))%60);
+    if(obj.ifcounting) obj.update();
+    (obj.hrs > 9) ? (os << obj.hrs) : (os << 0 << obj.hrs); os << ":";
+    (obj.min > 9) ? (os << obj.min) : (os << 0 << obj.min); os << ":";
+    (obj.sec > 9) ? (os << obj.sec) : (os << 0 << obj.sec);
     return os;
+    
 }
 
 void varTime::count()
 {
     ifcounting = true;
-    start = std::chrono::system_clock::now();
+    start = std::chrono::system_clock::now(); << 0 << obj.min); os << ":";
+    (obj.sec > 9) ? (os << obj.sec) : (os << 0 << obj.sec);
+    return os;
+}
 }
 void varTime::stop()
 {   
@@ -118,7 +102,6 @@ void varTime::stop()
 void varTime::update()
 {
     const unsigned int data = (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - start)).count();
-
     start = std::chrono::system_clock::now();
     sec = (sec + (data % 60));
     unsigned int _min = min + (data /60) + (sec / 60); 
