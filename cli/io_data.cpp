@@ -4,10 +4,9 @@
 
 #include "io_data.h"
 
-
 static std::fstream stream;
 
-std::string getdata()
+const std::string getHistory()
 {
     stream.open("saves.txt");
     
@@ -16,8 +15,8 @@ std::string getdata()
     int loopcnt= 0;
     std::array<char,10> nowdate;
     std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    std::strftime(&nowdate[0],11, "%d-%m-%Y", std::localtime(&now));
-
+    std::strftime(&nowdate[0],11, "%d-%m-%Y", std::localtime(&now));const std::string formatHistory(char* begin,const unsigned int size);
+    
     while(_continue)
     {
         stream.seekp((-45*(loopcnt+1)),std::ios::end);
@@ -38,4 +37,5 @@ std::string getdata()
     stream.close();
     return to_return;
 }
+
 
