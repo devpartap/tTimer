@@ -2,12 +2,11 @@
 
 class timer
 {
-public:
+public: 
     short hrs;
     short min;
     short sec;
 
-public: 
     timer();
     timer(const short& hr, const short& mn, const short& sc);
     timer(std::string_view data);
@@ -33,12 +32,15 @@ public:
 
     timer operator-(varTime & obj);
     varTime operator+(const timer &obj);
-
-    friend std::ostream& operator<<(std::ostream & os,varTime & obj);
+    bool operator<(const char * data);
+    bool operator>(const char * data);
 
     void count();
     void stop();
     void update();
+
+    friend std::ostream& operator<<(std::ostream & os,varTime & obj);
 };
 
 std::string printnget(const char * data,const unsigned int & size, timer* times);
+std::string timer_tostr(const timer & obj);

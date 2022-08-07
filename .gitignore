@@ -1,4 +1,6 @@
 cli/main
+cli/timer
+cli/io_data
 cli/justthere.cpp
 cli/saves.txt
 .vscode

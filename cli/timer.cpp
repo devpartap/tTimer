@@ -106,6 +106,20 @@ std::ostream& operator<<(std::ostream & os,varTime & obj)
     return os;
 }
 
+bool varTime::operator>(const char * data)
+ {
+    if(hrs > ((((int)(data[0]-'0'))*10 ) + ((int)(data[1]-'0')))) return true;
+    else if (min > ((((int)(data[3]-'0'))*10 ) + ((int)(data[4]-'0')))) return true;
+    else if (sec > ((((int)(data[6]-'0'))*10 ) + ((int)(data[7]-'0')))) return true;
+    else return false;
+ }
+
+bool varTime::operator<(const char * data)
+{
+    if(operator>(data)) return false;
+    else return true;
+}
+
 void timer::synctime()
 {
     short _min = min + (sec / 60); 
@@ -157,4 +171,11 @@ std::string printnget(const char * data,const unsigned int & size, timer* times)
     times[1] = times[2] - times[0];
 
     return ey.str();
+}
+
+std::string timer_tostr(const timer & obj)
+{
+    std::stringstream st;
+    st << obj;
+    return st.str();
 }

@@ -5,3 +5,5 @@
 // };
 
 const std::string getHistory();
+void noteinfo();
+void savestate(const std::string &stime);
