@@ -7,6 +7,7 @@
 static std::fstream stream;
 static char prefix[24];
 static bool isfirst = true;
+
 const std::string getHistory()
 {
     stream.open("saves.txt");
@@ -32,10 +33,12 @@ const std::string getHistory()
              _continue = false;
         }  
     }
+    if(loopcnt == 0) return "";
 
     stream.seekp(-45*(loopcnt),std::ios::end);
-    char to_return[45*loopcnt];
+    char to_return[(45*loopcnt)+1];
     stream.read(&to_return[0],45*loopcnt);
+    to_return[45*loopcnt] = '\0';
     stream.close();
     return to_return;
 }
