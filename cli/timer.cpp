@@ -106,19 +106,18 @@ std::ostream& operator<<(std::ostream & os,varTime & obj)
     return os;
 }
 
-bool varTime::operator>(const char * data)
- {
-    if(hrs > ((((int)(data[0]-'0'))*10 ) + ((int)(data[1]-'0')))) return true;
-    else if (min > ((((int)(data[3]-'0'))*10 ) + ((int)(data[4]-'0')))) return true;
-    else if (sec > ((((int)(data[6]-'0'))*10 ) + ((int)(data[7]-'0')))) return true;
-    else return false;
- }
+bool varTime::operator==(const short* data)
+ {  
+    // hrs = ((int)(data[0]- '0')*10) + (int)(data[1]-'0');
+    // min = ((int)(data[3]-'0')*10) + (int)(data[4]-'0');
+    // sec = ((int)(data[6] -'0')*10) + (int)(data[7]-'0');
 
-bool varTime::operator<(const char * data)
-{
-    if(operator>(data)) return false;
-    else return true;
-}
+    if((data[0] == hrs) && (data[1] == min) && (data[2] == sec)){ 
+        delete data;
+        return true;
+    }
+    return false;
+ }
 
 void timer::synctime()
 {
@@ -153,9 +152,10 @@ void varTime::update()
 
 std::string printnget(const char * data,const unsigned int & size, timer* times)
 {   // [Optimisable?]
-
     std::stringstream ey;
     ey << " Today's sits :- \n      Duration         Time Studied  Not Studied      Sits \n";
+
+    if(size){
     for(unsigned int i = 0; i<size;i = i + 45)
     {
         
@@ -170,6 +170,11 @@ std::string printnget(const char * data,const unsigned int & size, timer* times)
     }
     times[1] = times[2] - times[0];
 
+    }
+    else
+    {
+        ey << "         --                 --           --            --\n";
+    }
     return ey.str();
 }
 
