@@ -32,7 +32,8 @@ public:
 
     timer operator-(varTime & obj);
     varTime operator+(const timer &obj);
-    bool operator==(const short* data);
+    bool operator<(const char * data);
+    bool operator>(const char * data);
 
     void count();
     void stop();
