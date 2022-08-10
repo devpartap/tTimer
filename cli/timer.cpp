@@ -108,10 +108,6 @@ std::ostream& operator<<(std::ostream & os,varTime & obj)
 
 bool varTime::operator==(const short* data)
  {  
-    // hrs = ((int)(data[0]- '0')*10) + (int)(data[1]-'0');
-    // min = ((int)(data[3]-'0')*10) + (int)(data[4]-'0');
-    // sec = ((int)(data[6] -'0')*10) + (int)(data[7]-'0');
-
     if((data[0] == hrs) && (data[1] == min) && (data[2] == sec)){ 
         delete data;
         return true;

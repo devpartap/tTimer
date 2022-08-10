@@ -34,9 +34,10 @@ const std::string getHistory()
     }
 
     stream.seekp(-45*(loopcnt),std::ios::end);
-    char to_return[45*loopcnt];
+    char to_return[(45*loopcnt)+1];
     stream.read(&to_return[0],45*loopcnt);
     stream.close();
+    to_return[(45*loopcnt)] = '\0';
     return to_return;
 }
 

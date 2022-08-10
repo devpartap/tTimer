@@ -33,9 +33,8 @@ int main()
     const std::string to_print = printnget(&history[0],history.size(),times);
     
     std::thread ifenter(state,&studied);
-    
     bool towrite = false;
-    int j = 0;
+
     while(true){
 
     std::cout << to_print << std::endl;
@@ -51,7 +50,6 @@ int main()
 
     std::this_thread::sleep_for(1s);
     system("clear");
-    j++;
     }
 
     ifenter.detach(); 
