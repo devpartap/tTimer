@@ -7,8 +7,91 @@
     </head>
 
 <body>
+  <ons-splitter>
+    <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+      <ons-page>
+        <ons-list>
+          <ons-list-item onclick="load('home.html')" tappable>
+            Graphs
+          </ons-list-item>
+          <ons-list-item onclick="load('settings.html')" tappable>
+            Settings
+          </ons-list-item>
+          <ons-list-item onclick="load('settings.html')" tappable>
+            About
+          </ons-list-item>
+        </ons-list>
+      </ons-page>
+    </ons-splitter-side>
+    <ons-splitter-content id="content" page="src/track.html"></ons-splitter-content>
+  </ons-splitter>
 
-    <ons-page>updated alright!</ons-page>
+
+
+      
+      <!-- <template id="home.html">
+        <ons-page>
+          <ons-toolbar>
+            <div class="left">
+              <ons-toolbar-button onclick="fn.open()">
+                <ons-icon icon="md-menu"></ons-icon>
+              </ons-toolbar-button>
+            </div>
+            <div class="center">
+              Main
+            </div>
+          </ons-toolbar>
+          <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+            Swipe right to open the menu!
+          </p>
+        </ons-page>
+      </template> -- ar menu = document.getElementById('menu');
+          menu.open();
+          <ons-toolbar>
+            <div class="left">
+              <ons-toolbar-button onclick="fn.open()">
+                <ons-icon icon="md-menu"></ons-icon>
+              </ons-toolbar-button>
+            </div>
+            <div class="center">
+              Settings
+            </div>
+          </ons-toolbar>
+        </ons-page>
+      </template>
+
+      <template id="about.html">
+        <ons-page>
+          <ons-toolbar>
+            <div class="left">
+              <ons-toolbar-button onclick="fn.open()">
+                <ons-icon icon="md-menu"></ons-icon>
+              </ons-toolbar-button>
+            </div>
+            <div class="center">
+              About
+            </div>
+          </ons-toolbar>
+        </ons-page>
+      </template> -->
+
+
+        <script>
+
+        window.fn = {};
+        window.fn.open = function() {
+          var menu = document.getElementById('menu');
+          menu.open();
+        };
+
+        window.fn.load = function(page) {
+          var content = document.getElementById('content');
+          var menu = document.getElementById('menu');
+          content.load(page)
+            .then(menu.close.bind(menu));
+        };
+        </script>
+
 
 </body>
 </html>
