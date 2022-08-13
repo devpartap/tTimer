@@ -1,0 +1,84 @@
+<ons-page id="helloworld-page">
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="fn.open()" style="color: SlateBlue;" icon="ion-ios-menu, material:md-menu"></ons-toolbar-button>
+      </div>
+
+      <div class="center">STv2</div>
+    </ons-toolbar>
+  
+    <p style="text-align: center">Some content.</p>
+    
+    <br><br><br>
+    <h4 style="text-align:center;">Timer SVG comes here</h4>
+    <br><br><br>
+
+    <div id="timer" style="text-align: center; font-size:xxx-large;">00:00:00</div>
+    <br><br><br>
+    <ons-button modifier="large" id="mainbut" onclick="changestate()">Start Studing</ons-button>
+
+
+<script>
+
+  var state = false;
+  var h = 0;
+  var m = 0;
+  var s = 0;
+  var Interval;
+
+  const timer = document.getElementById('timer');
+
+
+  function changestate()
+  {
+    if(state) {
+      console.log("off");
+      document.getElementById("mainbut").innerHTML = "Start Studing";
+      state = !state;
+      clearInterval(Interval);
+    }
+    else {
+      console.log("on");
+      document.getElementById("mainbut").innerHTML = "Stop";
+      state = !state;
+      clearInterval(Interval);
+      Interval = setInterval(timerCycle, 1000);
+    }
+  }
+
+function timerCycle() {
+
+  if (state) {
+
+    s = s + 1;
+    
+    if(s == 60){
+      m += 1;
+      s = 0;
+    } 
+    if(m == 60){
+      h += 1;
+      m = 0;
+    } 
+
+    let towrite = ""
+    if (h <= 9) {
+      towrite += "0";
+    }
+    towrite += h.toString() + ":";
+    if (m <= 9) {
+      towrite += "0";
+    }
+    towrite += m.toString() + ":";
+    if (s <= 9) {
+      towrite += "0";
+    }
+    towrite += s.toString();
+    
+    timer.innerHTML = towrite;
+    }
+  }
+  
+</script>
+
+</ons-page>
