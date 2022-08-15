@@ -1,4 +1,4 @@
-importScripts('src/workbox-sw.js');
+importScripts('workbox-sw.js');
 
 workbox.routing.registerRoute(
     ({request}) => request.destination === 'image',
