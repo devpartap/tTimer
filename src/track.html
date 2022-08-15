@@ -39,7 +39,9 @@
   var state = false;
   var stime = [0,0,0];
   var nstime= [0,0,0];
+  var tNow  = [0,0,0];
 
+  var istimeset = false;
   var Interval;
 
   const sTimer = document.getElementById('_sTime');
@@ -66,40 +68,20 @@
   tTimer.innerHTML = returnStr([hrs,min,sec]);
 }
 
-
   function countStuding() {
 
-
-   stime[2]=stime[2] + 1;
-    
-    if(stime[2] == 60){
-     stime[1]+= 1;
-     stime[2] = 0;
-    } 
-    if(stime[1]== 60){
-     stime[0]+= 1;
-     stime[1]= 0;
-    } 
-
+    stime = subTime(timeEclipsed(),nstime);
     sTimer.innerHTML = returnStr(stime);
     updateTotalTime();
+
 }  
 
 function countnStuding() {
 
- nstime[2]=nstime[2] + 1;
-  
-  if(nstime[2] == 60){
-   nstime[1]+= 1;
-   nstime[2] = 0;
-  } 
-  if(nstime[1]== 60){
-   nstime[0]+= 1;
-   nstime[1]= 0;
-  } 
- 
+  nstime = subTime(timeEclipsed(),stime);
   nsTimer.innerHTML = returnStr(nstime);
   updateTotalTime();
+
 }  
 
 function returnStr(data)
@@ -120,9 +102,58 @@ function returnStr(data)
     return towrite;
 }
 
+function timeEclipsed()
+{
+  var et = new Date;
+  return subTime([et.getHours(),et.getMinutes(),et.getSeconds()],tNow);
+}
+
+function subTime(from,to)
+{
+  var s = 0;
+  var m = 0;
+  var h = 0;
+    if(from[2] >= to[2])
+    {
+        s = from[2] - to[2];
+        if(from[1] >= to[1]) 
+        {
+            m = from[1] - to[1];
+            h = from[0] - to[0];
+        }
+        else   
+        {
+            m = 60 + from[1] - to[1];
+            h = from[0] - to[0] - 1;
+        }
+    }
+    else{
+        if(from[1] >= to[1]) 
+        {
+            m = from[1] - to[1]- 1;
+            s = 60 + from[2] - to[2];
+            h = from[0] - to[0];
+        }
+        else
+        {
+            m = 60 + from[1] - to[1] - 1;
+            s = 60 + from[2] - to[2];
+            h = from[0] - to[0] - 1;
+        }
+    }
+
+    return [h,m,s] 
+}
+
 
 function changestate()
   {
+    if(!istimeset)
+    {
+      var tn = new Date;
+      tNow = [tn.getHours(),tn.getMinutes(),tn.getSeconds()]
+      istimeset = true;
+    }
     if(state) {
       butto.innerHTML = "Start Studing";
       state = !state;
