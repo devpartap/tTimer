@@ -3,6 +3,8 @@
         <title>STv2</title>
         <link rel="stylesheet" href="onsenui/css/src/onsenui.css">
     <link rel="stylesheet" href="onsenui/css/css-components-src/onsen-css-components.css">
+    <link rel="stylesheet" href="styles/pageComponents.css">
+    <link rel="manifest" href="manifest.json">
     <script src="onsenui/scripts/onsenui.js"></script>
     </head>
 
@@ -14,7 +16,7 @@
           <ons-list-item onclick="load('home.html')" tappable>
             Graphs
           </ons-list-item>
-          <ons-list-item onclick="load('settings.html')" tappable>
+          <ons-list-item onclick="fn.load('src/settings.html')" tappable>
             Settings
           </ons-list-item>
           <ons-list-item onclick="load('settings.html')" tappable>
@@ -26,57 +28,7 @@
     <ons-splitter-content id="content" page="src/track.html"></ons-splitter-content>
   </ons-splitter>
 
-
-
-      
-      <!-- <template id="home.html">
-        <ons-page>
-          <ons-toolbar>
-            <div class="left">
-              <ons-toolbar-button onclick="fn.open()">
-                <ons-icon icon="md-menu"></ons-icon>
-              </ons-toolbar-button>
-            </div>
-            <div class="center">
-              Main
-            </div>
-          </ons-toolbar>
-          <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-            Swipe right to open the menu!
-          </p>
-        </ons-page>
-      </template> -- ar menu = document.getElementById('menu');
-          menu.open();
-          <ons-toolbar>
-            <div class="left">
-              <ons-toolbar-button onclick="fn.open()">
-                <ons-icon icon="md-menu"></ons-icon>
-              </ons-toolbar-button>
-            </div>
-            <div class="center">
-              Settings
-            </div>
-          </ons-toolbar>
-        </ons-page>
-      </template>
-
-      <template id="about.html">
-        <ons-page>
-          <ons-toolbar>
-            <div class="left">
-              <ons-toolbar-button onclick="fn.open()">
-                <ons-icon icon="md-menu"></ons-icon>
-              </ons-toolbar-button>
-            </div>
-            <div class="center">
-              About
-            </div>
-          </ons-toolbar>
-        </ons-page>
-      </template> -->
-
-
-        <script>
+<script>
 
         window.fn = {};
         window.fn.open = function() {
@@ -90,7 +42,13 @@
           content.load(page)
             .then(menu.close.bind(menu));
         };
-        </script>
+
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/src/service-worker.js')
+          .then(() => console.log("Service Worker Registered"));
+        }
+
+</script>
 
 
 </body>

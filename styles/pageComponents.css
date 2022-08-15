@@ -1,0 +1,7 @@
+.tableBottom {
+    position:absolute ;
+    bottom:0;width:100%;
+    border-style: none;
+    table-layout: fixed;
+    text-align: center;
+}

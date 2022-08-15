@@ -1,3 +1,4 @@
+
 <ons-page id="helloworld-page">
     <ons-toolbar>
       <div class="left">
@@ -13,72 +14,152 @@
     <h4 style="text-align:center;">Timer SVG comes here</h4>
     <br><br><br>
 
-    <div id="timer" style="text-align: center; font-size:xxx-large;">00:00:00</div>
+    <div id="_sTime" style="text-align: center;font-size:xxx-large;">00:00:00</div>
     <br><br><br>
     <ons-button modifier="large" id="mainbut" onclick="changestate()">Start Studing</ons-button>
+    <table class="tableBottom">
+      <tr style="height: 80px;">
+        <td style="border-right: 1px solid;">
+          <h2 id="_nsTime">00:00:00</h2>
+          <p style="font-size: 12px;position: relative;top: -12;">Time Not Studied</p>
+        </td>
+        <td>
+          <h2 id="_tTime">00:00:00</h2>
+          <p style="font-size: 12px;position: relative;top: -12; word-spacing: 2px;">Total      Sit  Time</p>
+        </td> 
+      </tr>
+    </table>
+    
+    <hr>
+    </div>
 
 
-<script>
+
+  <script>
 
   var state = false;
-  var h = 0;
-  var m = 0;
-  var s = 0;
+  var stime = [0,0,0];
+  var nstime= [0,0,0];
+
   var Interval;
 
-  const timer = document.getElementById('timer');
+  const sTimer = document.getElementById('_sTime');
+  const nsTimer = document.getElementById('_nsTime');
+  const tTimer = document.getElementById('_tTime');
+  const butto = document.getElementById("mainbut");
+
+  function getTotalTIme()
+{
+  var hrs = stime[0] + nstime[0];
+  var min = stime[1] + nstime[1];
+  var sec = stime[2] + nstime[2];
+
+   if(sec >= 60){
+    sec -= 60;
+    min += 1;
+   }
+   if(min >= 60){
+    min -= 60;
+    hrs += 1;
+   }
+
+    let towrite = "";
+    if(hrs <= 9){
+      towrite += "0";
+    }
+    towrite += hrs + ":";
+    if (min<= 9) {
+      towrite += "0";
+    }
+    towrite += min + ":";
+    if (sec<= 9) {
+      towrite += "0";
+    }
+    towrite += sec;
+    tTimer.innerHTML = towrite;
+}
+
+
+  function countStuding() {
+
+
+   stime[2]=stime[2] + 1;
+    
+    if(stime[2] == 60){
+     stime[1]+= 1;
+     stime[2] = 0;
+    } 
+    if(stime[1]== 60){
+     stime[0]+= 1;
+     stime[1]= 0;
+    } 
+
+    let towrite = "";
+    if(stime[0] <= 9){
+      towrite += "0";
+    }
+    towrite += stime[0] + ":";
+    if (stime[1]<= 9) {
+      towrite += "0";
+    }
+    towrite += stime[1] + ":";
+    if (stime[2]<= 9) {
+      towrite += "0";
+    }
+    towrite += stime[2].toString();
+    
+    sTimer.innerHTML = towrite;
+    getTotalTIme();
+}  
+
+function countnStuding() {
+
+ nstime[2]=nstime[2] + 1;
+  
+  if(nstime[2] == 60){
+   nstime[1]+= 1;
+   nstime[2] = 0;
+  } 
+  if(nstime[1]== 60){
+   nstime[0]+= 1;
+   nstime[1]= 0;
+  } 
+
+
+  let towrite = "";
+    if(nstime[0] <= 9){
+      towrite += "0";
+    }
+    towrite += nstime[0] + ":";
+    if (nstime[1]<= 9) {
+      towrite += "0";
+    }
+    towrite += nstime[1] + ":";
+    if (nstime[2]<= 9) {
+      towrite += "0";
+    }
+    towrite += nstime[2].toString();
+  
+  nsTimer.innerHTML = towrite;
+  getTotalTIme();
+}  
 
 
   function changestate()
   {
     if(state) {
-      console.log("off");
-      document.getElementById("mainbut").innerHTML = "Start Studing";
+      butto.innerHTML = "Start Studing";
       state = !state;
       clearInterval(Interval);
+      Interval = setInterval(countnStuding,1000);
     }
     else {
-      console.log("on");
-      document.getElementById("mainbut").innerHTML = "Stop";
+      butto.innerHTML = "Stop";
       state = !state;
       clearInterval(Interval);
-      Interval = setInterval(timerCycle, 1000);
+      Interval = setInterval(countStuding,1000);
     }
   }
 
-function timerCycle() {
-
-  if (state) {
-
-    s = s + 1;
-    
-    if(s == 60){
-      m += 1;
-      s = 0;
-    } 
-    if(m == 60){
-      h += 1;
-      m = 0;
-    } 
-
-    let towrite = ""
-    if (h <= 9) {
-      towrite += "0";
-    }
-    towrite += h.toString() + ":";
-    if (m <= 9) {
-      towrite += "0";
-    }
-    towrite += m.toString() + ":";
-    if (s <= 9) {
-      towrite += "0";
-    }
-    towrite += s.toString();
-    
-    timer.innerHTML = towrite;
-    }
-  }
-  
 </script>
-
 </ons-page>
