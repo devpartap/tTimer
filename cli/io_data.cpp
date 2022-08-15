@@ -4,6 +4,8 @@
 
 #include "io_data.h"
 
+static std::string logs = "";
+
 static std::fstream stream;
 static char prefix[24];
 static bool isfirst = true;
@@ -63,5 +65,3 @@ void savestate(const std::string& stime)
     stream << &nowde[0] << stime << "\n";
     stream.close();
 }
-
-

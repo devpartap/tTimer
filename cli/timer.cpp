@@ -87,7 +87,6 @@ timer varTime::operator-(varTime& obj)
     if(obj.ifcounting) obj.update();
     return timer::operator-(obj);
 }
-
 std::ostream& operator<<(std::ostream & os,const timer & obj)
 {
     (obj.hrs > 9) ? (os << obj.hrs) : (os << 0 << obj.hrs); os << ":";
@@ -133,6 +132,7 @@ void varTime::stop()
     update();
     ifcounting = false;
 }
+
 void varTime::update()
 {
     if(ifcounting){
