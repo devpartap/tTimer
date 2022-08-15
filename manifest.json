@@ -1,7 +1,7 @@
 {
     "name": "STv2",
     "short_name": "STv2",
-    "start_url": "index.html",
+    "start_url": ".",
     "icons": [
         {
           "src": "icons/manifest-icon-192.maskable.png",
@@ -30,6 +30,6 @@
       ],
     "theme_color":"#000000",
     "background_color":"#ffffff",
-    "display":"fullscreen",
+    "display":"standalone",
     "orentation":"portrait"
 }

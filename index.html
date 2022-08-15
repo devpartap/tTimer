@@ -43,10 +43,11 @@
             .then(menu.close.bind(menu));
         };
 
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('src/sw.js')
-          .then(() => console.log("Service Worker Registered"));
-        }
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/src/sw.js')
+            .then(() => console.log("Service Worker Registered"))
+            .catch(e => console.log(e));
+         }
 
 </script>
 
