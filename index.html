@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles/pageComponents.css">
     <link rel="manifest" href="manifest.json">
     <script src="onsenui/scripts/onsenui.js"></script>
+    <script src="clipborad.js/clipboard.js"></script>
     </head>
 
 <body>
@@ -13,19 +14,21 @@
     <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
       <ons-page>
         <ons-list>
-          <ons-list-item onclick="load('home.html')" tappable>
+          <ons-list-item onclick="fn.load('src/hash.html')" tappable>
             Graphs
           </ons-list-item>
           <ons-list-item onclick="fn.load('src/settings.html')" tappable>
             Settings
           </ons-list-item>
-          <ons-list-item onclick="load('settings.html')" tappable>
+          <ons-list-item onclick="fn.load('src/about.html')" tappable>
             About
           </ons-list-item>
         </ons-list>
       </ons-page>
     </ons-splitter-side>
-    <ons-splitter-content id="content" page="src/track.html"></ons-splitter-content>
+    <ons-splitter-content>
+      <ons-navigator id="navigator" page="src/track.html"></ons-navigator>
+    </ons-splitter-content>
   </ons-splitter>
 
 <script>
@@ -37,10 +40,8 @@
         };
 
         window.fn.load = function(page) {
-          var content = document.getElementById('content');
-          var menu = document.getElementById('menu');
-          content.load(page)
-            .then(menu.close.bind(menu));
+        document.querySelector('#menu').close();
+        document.querySelector('#navigator').bringPageTop(page, { animation: 'fade' });
         };
 
         if('serviceWorker' in navigator) {
