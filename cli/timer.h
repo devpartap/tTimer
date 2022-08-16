@@ -1,5 +1,4 @@
 #pragma once
-#include <chrono>
 
 class timer
 {
@@ -17,7 +16,6 @@ public:
     timer operator+(const std::string_view & data);
     timer operator-(const timer & obj);
     void synctime();
-    std::string getinstr();
 
     friend std::ostream& operator<<(std::ostream & os,const timer & obj);
 };

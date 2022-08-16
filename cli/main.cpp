@@ -1,6 +1,8 @@
 #include <iostream>
 #include <thread>
 #include <string>
+#include <string_view>
+#include <sstream>
 
 #include "timer.h"
 #include "io_data.h"
@@ -10,7 +12,13 @@
 
 using namespace std::chrono_literals;
 
-std::string exeCommand(varTime *vt)
+varTime studied;
+varTime sittime;
+
+timer times[3];
+std::string to_print = "";
+
+std::string exeCommand()
 {
     std::string inputcom = "\n";
     bool countstate = false;
@@ -21,18 +29,35 @@ std::string exeCommand(varTime *vt)
         {
             if(countstate)
             {
-                vt->stop();
+                studied.stop();
                 addLog("Stopped Studing!");
             }
             else 
             {
-                vt->count();
+                studied.count();
                 addLog("Started Studing!");
             }
         }
-        else if(inputcom == "yoyo")
+        else if(inputcom[0] == '+')
         {
-            std::cout << "yup" << std::endl;
+            std::string_view  st(&inputcom[1],8);
+            std::string_view nst(&inputcom[10],8);
+            std::string_view  et(&inputcom[19],8);
+
+            timer totalsit = timer(st) + nst;
+            times[0] = times[0] + st;
+            times[1] = times[1] + nst;
+            times[2] = times[2] + totalsit;
+            
+            std::stringstream pss;
+            std::stringstream ss;
+
+            pss << timer(et) - totalsit << " => " << et << "  -  " << st << "     " << nst << "    | " << totalsit << '\n';
+            ss  << " [" << timer(et) - totalsit << " - " << et << "] => " << st << '\n';
+            to_print += pss.str();
+
+            saveexplictTime(ss.str());
+
         }
         inputcom = "";
         
@@ -41,18 +66,15 @@ std::string exeCommand(varTime *vt)
 
 int main()
 {
-    varTime studied;
-    varTime sittime;
     short *countinfo = new short[3]{countStart};
     studied.stop();
 
     noteinfo();
     const std::string history = getHistory();
     
-    timer times[3];
-    const std::string to_print = printnget(&history[0],history.size(),times);
+    to_print = printnget(&history[0],history.size(),times);
     
-    std::thread ifenter(exeCommand,&studied);
+    std::thread ifenter(exeCommand);
     bool towrite = false;
 
     while(true){
@@ -71,7 +93,6 @@ int main()
     std::this_thread::sleep_for(1s);
     system("clear");
     }
-
     ifenter.detach(); 
 }
 
