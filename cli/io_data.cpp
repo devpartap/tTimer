@@ -11,8 +11,7 @@ static char prefix[24];
 static bool isfirst = true;
 const std::string getHistory()
 {
-    stream.open("saves.txt");
-    
+    stream.open("/home/dev/Documents/Studysaves.txt");
     std::array<char,10> data;
     bool _continue = true;
     int loopcnt= 0;
@@ -20,11 +19,11 @@ const std::string getHistory()
     std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     std::strftime(&nowdate[0],11, "%d-%m-%Y", std::localtime(&now));
     //const std::string formatHistory(char* begin,const unsigned int size);
+
     
-       while(_continue)
+    while(_continue)
     {
         stream.seekp((-45*(loopcnt+1)),std::ios::end);
-        //stream.seekp(0);
         stream.read(&data[0],10);
 
         if(data == nowdate) {
@@ -51,7 +50,7 @@ void noteinfo()
 void savestate(const std::string& stime)
 {
     char nowde[14];
-    stream.open("saves.txt");
+    stream.open("/home/dev/Documents/Studysaves.txt");
     if(isfirst){
         stream.seekg(0,std::ios::end);
         isfirst = false;
@@ -67,7 +66,7 @@ void savestate(const std::string& stime)
 
 void saveexplictTime(const std::string& tosave)
 {
-    stream.open("saves.txt");
+    stream.open("/home/dev/Documents/Studysaves.txt");
     if(isfirst){
         stream.seekg(0,std::ios::end);
     }

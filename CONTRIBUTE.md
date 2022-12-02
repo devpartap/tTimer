@@ -2,7 +2,7 @@
 
 - [X] save data locally
 - this is so that the data of the day is saved locally and we can track productivity through the day.
-- [ ] add command feature
+- [X] add command feature
 - in the second thread which takes care of starting and stopping the time, a `std::cin` to be used so that we can take commands from the user
 - [ ] add command to view week and month data from save.txt
 - the history view only shows data of the day, a command to enable it for week or month will be helpful

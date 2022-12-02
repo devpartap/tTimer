@@ -14,9 +14,9 @@ Make sure you have gcc or clang installed, or any of your c++ compilers.
 	` cd cli `
     
 3. build the project \
-	` clang++ -std=c++20 -O3 main.cpp timer.cpp io_data.cpp -lstdc++ -o STv2` \
+	` clang++ -std=c++20 -O3 main.cpp timer.cpp io_data.cpp logs.cpp Libs/CppLinuxSerial/SerialPort.cpp -lstdc++ -o STv2` \
     									or \
-    ` gcc -std=c++20 -O3 main.cpp timer.cpp io_data.cpp -lstdc++ -o STv2` 
+    ` gcc -std=c++20 -O3 main.cpp timer.cpp io_data.cpp logs.cpp Libs/CppLinuxSerial/SerialPort.cpp -lstdc++ -o STv2` 
 
 **- how to use -** 
 * This program tracks your studied time on a span of the day
