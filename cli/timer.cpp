@@ -165,11 +165,6 @@ std::string printnget(const char * data,const unsigned int & size, timer* times)
         times[2] = times[2] + duration;       
     }
     times[1] = times[2] - times[0];
-
-    }
-    else
-    {
-        ey << "         --                 --           --            --\n";
     }
     return ey.str();
 }
