@@ -49,6 +49,7 @@
             .then(() => console.log("Service Worker Registered"))
             .catch(e => console.log(e));
          }
+    let screenLock = await navigator.wakeLock.request('screen');
 
 </script>
 
