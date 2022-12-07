@@ -155,6 +155,7 @@ void exeCommand()
                 times[2] = times[2] + itsit;
                 pss << ifrom << " => " << "13:00:00" << "  -  " << ist << "     " << inst << "    | " << itsit << '\n';
                 ss  << " [" << ifrom << " - " << "13:00:00" << "] => " << ist << '\n';
+                addLog("Tution Time Added!");
             }
             else
             {
