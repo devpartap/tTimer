@@ -11,7 +11,7 @@
 
 
 #define countStart 00,02,00 // format hh,mm,ss
-#define dupliTime 30 // time to duplicate main save file
+#define dupliTime 30 // time to duplicate main save filec
 
 using namespace std::chrono_literals;
 using namespace mn::CppLinuxSerial;
@@ -78,7 +78,6 @@ bool listenSwitch()
         if(studyState == !ledstate)
         {
             serialPort.Write("b");
-            addLog("written");
             ledstate = !ledstate;
             std::this_thread::sleep_for(1s);
         }
@@ -200,7 +199,6 @@ void exeCommand()
     }   
 }
 
-
 int main()
 {
     short *countinfo = new short[3]{countStart};
@@ -213,19 +211,11 @@ int main()
     bool towrite = false;
 
     while(true){
-
-    if(to_print != "") 
-    {
-        std::cout << to_print << std::endl;
-    }
-    else
-    {
-        std::cout << "         --                 --           --            --\n";
-    }
-
+    std::cout << to_print << std::endl;
     std::cout << "         Today Total  :- " << studied + times[0]  << "     " << (sittime - studied) + times[1] << "    | " << sittime + times[2]<< std::endl;    
     std::cout << "         Currently    :- " << studied << "     " << sittime - studied  << "    | " << sittime << std::endl;
     std::cout << '\n' << viewLogs();
+
     if(towrite){
         savestate(timer_tostr(studied));
     }

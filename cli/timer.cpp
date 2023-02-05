@@ -154,7 +154,6 @@ std::string printnget(const char * data,const unsigned int & size, timer* times)
     if(size){
     for(unsigned int i = 0; i<size;i = i + 45)
     {
-        
         timer from = std::string_view(&data[i+12],8);
         timer to = std::string_view(&data[i+23],8);
         timer studied = std::string_view(&data[i+36],8);
@@ -166,6 +165,11 @@ std::string printnget(const char * data,const unsigned int & size, timer* times)
     }
     times[1] = times[2] - times[0];
     }
+    else
+    {
+        ey << "         --                 --           --            --\n";
+    }
+    
     return ey.str();
 }
 

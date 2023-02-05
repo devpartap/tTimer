@@ -3,6 +3,7 @@
 #include <array>
 
 #include "io_data.h"
+#include "logs.h"
 
 static std::string logs = "";
 
@@ -18,9 +19,30 @@ const std::string getHistory()
     std::array<char,10> nowdate;
     std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     std::strftime(&nowdate[0],11, "%d-%m-%Y", std::localtime(&now));
-    //const std::string formatHistory(char* begin,const unsigned int size);
 
-    
+//ik it's bad code but it's quick do to find how many days left...
+    short caltodate = 92;
+    short monthdays = 0;
+    if((int(nowdate[4] - '0') == 2))
+    {
+        monthdays = 31;
+    }
+    else if((int(nowdate[4] - '0') == 3))
+    {
+        monthdays = 31+28;
+    }
+
+    else if((int(nowdate[4] - '0') == 4))
+    {
+        monthdays = 31+28+31;
+    }
+
+    std::string msg = std::to_string(caltodate - (monthdays + (int(nowdate[0] - '0')*10) + int(nowdate[1] - '0'))) + " Days Left!!";
+    addLog(msg.c_str());
+// bad code ends
+
+//const std::string formatHistory(char* begin,const unsigned int size);
+
     while(_continue)
     {
         stream.seekp((-45*(loopcnt+1)),std::ios::end);

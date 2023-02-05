@@ -12,7 +12,7 @@
 
 int distance;
 short memo;
-bool ledstate = false;
+bool ledstate = LOW;
 char rd = ' ';
 
 void switchledstate();
@@ -30,9 +30,12 @@ void setup() {
   pinMode(led2G, INPUT);
   pinMode(led3G, INPUT);
 
-  digitalWrite(led1,LOW);
-  digitalWrite(led2,LOW);
-  digitalWrite(led3,LOW);
+  analogWrite(led1,0);
+  analogWrite(led2,0);
+  analogWrite(led3,0);
+  analogWrite(led1G,0);
+  analogWrite(led2G,0);
+  analogWrite(led3G,0);
   
   Serial.begin(9600); // Starts the serial communication
 }
@@ -43,7 +46,7 @@ void loop() {
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
-  //distance = (pulseIn(echoPin, HIGH) * 0.034) / 2;
+
   if(((pulseIn(echoPin, HIGH) * 0.034) / 2) <= 10)
   {
     memo++;
@@ -71,17 +74,16 @@ void switchledstate()
 {
   if(ledstate == HIGH)
   {
-    digitalWrite(led1,LOW);
-    digitalWrite(led2,LOW);
-    digitalWrite(led3,LOW);
-    
+    analogWrite(led1,0);
+    analogWrite(led2,0);
+    analogWrite(led3,0);
+    ledstate = LOW;
   }
   else
   {
-    digitalWrite(led1,HIGH);
-    digitalWrite(led2,HIGH);
-    digitalWrite(led3,HIGH);
+    analogWrite(led1,200);
+    analogWrite(led2,200);
+    analogWrite(led3,200);
+    ledstate = HIGH;
   }
-  
-  ledstate != ledstate;
 }
