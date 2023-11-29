@@ -9,6 +9,7 @@
 
 // System includes
 #include <iostream>
+#include <stdint.h>
 #include <sstream>
 #include <stdio.h>      // Standard input/output definitions
 #include <string.h>     // String function definitions
@@ -29,7 +30,6 @@
 #include "Exception.hpp"
 #include "SerialPort.hpp"
 
-#define    BOTHER 0010000
 
 namespace mn {
 namespace CppLinuxSerial {

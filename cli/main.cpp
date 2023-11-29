@@ -225,12 +225,12 @@ int main()
 
     std::this_thread::sleep_for(1s);
     system("clear");
-    if((loopCount%dupliTime == 0) && (towrite))
-    {
-        system("cp /home/dev/Documents/Studysaves.txt /home/dev/Dropbox/Studysaves.txt");
-        loopCount = 1;
-    }
-    loopCount++;
+    // if((loopCount%dupliTime == 0) && (towrite))
+    // {
+    //     system("cp /home/dev/Documents/Studysaves.txt /home/dev/Dropbox/Studysaves.txt");
+    //     loopCount = 1;
+    // }
+    // loopCount++;
 }
     ifenter.detach(); 
 	swich.detach();

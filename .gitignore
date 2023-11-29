@@ -1,6 +1,3 @@
-cli/main
-cli/timer
-cli/io_data
 cli/STv2
+cli/main
 cli/saves.txt
-.vscode
