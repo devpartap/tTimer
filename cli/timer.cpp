@@ -149,7 +149,7 @@ void varTime::update()
 std::string printnget(const char * data,const unsigned int & size, timer* times)
 {   // [Optimisable?]
     std::stringstream ey;
-    ey << " Today's sits :- \n      Duration         Time Studied  Not Studied      Sits \n";
+    ey << " Today's sits :- \n      Duration         Time Worked   Not Worked        Sits \n";
 
     if(size){
     for(unsigned int i = 0; i<size;i = i + 45)

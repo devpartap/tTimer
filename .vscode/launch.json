@@ -5,7 +5,7 @@
         "name": "C/C++: clang++ build and debug active file",
         "type": "lldb-vscode",
         "request": "launch",
-        "program": "${workspaceFolder}/cli/STv2.app",
+        "program": "${workspaceFolder}/tmprun/tTimer.app",
         "args": [],
         "env": [
           {

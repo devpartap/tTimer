@@ -7,6 +7,7 @@
 #include "timer.h"
 #include "io_data.h"
 #include "logs.h"
+#include "profiles.h"
 #include "Libs/CppLinuxSerial/SerialPort.hpp"
 
 
@@ -201,6 +202,8 @@ void exeCommand()
 
 int main()
 {
+    printProfiles();
+
     short *countinfo = new short[3]{countStart};
     studied.stop();
 
