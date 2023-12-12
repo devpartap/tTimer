@@ -15,7 +15,7 @@
                 "${workspaceFolder}/cli/Libs/CppLinuxSerial/SerialPort.cpp",
                 "-lstdc++",
                 "-o",
-                "${workspaceFolder}/tmprun/tTimer"
+                "${workspaceFolder}/cli/tmprun/tTimer"
             ],
             "options": {
                 "cwd": "/usr/bin"
