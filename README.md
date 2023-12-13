@@ -25,9 +25,9 @@ Make sure you have gcc or clang or any of your c++ compilers installed.
 * Press enter to start or stop your time count.
 
 **- commands -** \
-You can interact with the app by following  commands. \
+You can interact with the app by following commands. 
 
-|commands|explenation |
+|Commands|Explanation |
 | - | -|
 | 'enter'|To start or stop tracking time.|
 | '+hh:mm:ss hh:mm:ss hh:mm:ss'|To add external entry in the record(time not measured by the app) here first time is 'worked time', second time is 'not worked' time and third time is 'stopped working' time.|
@@ -35,4 +35,4 @@ You can interact with the app by following  commands. \
 | 's+'|To disable the attached switch.|
 | 'q'|To quit the app.|
 
->Contact me on discord - **Dev_Partap_#3175** yuy
+>Contact me on discord - **Dev_Partap_#3175**
