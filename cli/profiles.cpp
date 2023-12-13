@@ -5,21 +5,21 @@
 #include <fstream>
 #include <vector>
 
-#define pwait(x) cout << x << endl; getchar(); std::cin.ignore()
+#define pwait(x) cout << x << endl; getchar()//; std::cin.ignore()
 
 using std::cout, std::endl;
 
 static std::filesystem::path _profileDir_ = std::filesystem::current_path() / "profiles";
-static std::filesystem::directory_entry _currentProfile_;
+static std::filesystem::path _currentProfile_;
 
 void createNewProfile()
 {
     system("clear");
 
-    std::string profile_name = "hello there";
-    std::cout << "\n  Input New Profile Name(no extension) :- " << std::endl;
+    std::string profile_name = "";
+    std::cout << "\n  Input New Profile Name(no extension) :- ";
 
-    // std::cin >> profile_name;
+    std::getline(std::cin,profile_name);
    
     for(u_int8_t i = 0;i<profile_name.length();i++)
     {
@@ -37,12 +37,9 @@ void createNewProfile()
         std::filesystem::create_directories(_profileDir_);
     }
 
-    _currentProfile_.assign(_profileDir_ / profile_name);
-    cout << _currentProfile_ << endl;
-
-
     std::ofstream ofstream;
-    ofstream.open(_currentProfile_.path());
+    ofstream.open(_profileDir_ / profile_name);
+    ofstream.close();
     
     pwait("Profile Created, Press any key to continue ");
     system("clear");
@@ -56,32 +53,65 @@ void printProfiles()
         pwait("\n  You currently have no profile, press any key to create a profile ");
         createNewProfile();
     }
-    
 
-    std::vector<std::string> profiles;
 
-    for (auto const& dir_entry : std::filesystem::directory_iterator(_profileDir_)) 
-    {
-        profiles.push_back(dir_entry.path().filename());
-    }
+    bool reloop;
+    do {
+        reloop = false;
+        std::vector<std::filesystem::path> profiles;
 
-    for(auto a : profiles)
-    {
-        std::cout << a << std::endl;
-    }
-    
-    pwait("exit");
+        for (auto const& dir_entry : std::filesystem::directory_iterator(_profileDir_)) 
+        {
+            profiles.push_back(dir_entry.path());
+        }
 
+
+        cout << "\nChoose Profile To Log On : \n" << endl;
+
+        for(u_int i = 1;i<=profiles.size();i++)
+        {
+            cout << i << ". " << profiles[i-1].stem() << endl; 
+        }
+        cout << "\n" << profiles.size()+1 << ". " << "Create New Profile\n" << endl; 
+
+        int inp = 0;
+        std::cin>>inp;
+        std::cin.ignore();
+
+        if(inp > profiles.size()+1 || inp <= 0)
+        {
+            pwait("\n  Invalid Input!");
+            reloop = true;
+        }
+        
+        else if(inp == profiles.size()+1)
+        {
+            createNewProfile();
+            reloop = true;
+        }    
+
+        else
+        {
+            _currentProfile_.assign(profiles[inp-1]);
+        }
+
+        system("clear");
+
+    } while(reloop);
     
 }
 
-// std::string CurrentDir()
-// {
-//     return _profileDir_;
-// }
+std::string CurrentDir()
+{
+    return _profileDir_.string();
+}
 
-// std::string CurrentProfile()
-// {
-//     return _currentProfile_;
-// }
+std::string CurrentProfile()
+{
+    return _currentProfile_.stem().string();
+}
 
+std::string CurrentProfilePath()
+{  
+    return _currentProfile_.string();
+}

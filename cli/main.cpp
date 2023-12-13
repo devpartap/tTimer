@@ -29,9 +29,13 @@ std::string to_print = "";
 void exeCommand();
 bool listenSwitch();
 
-std::thread ifenter(exeCommand);
-std::thread swich(listenSwitch);
+std::thread* ifenter;
+std::thread* swich;
 
+void createThreads(){
+    ifenter = new std::thread(exeCommand);
+    swich = new std::thread(listenSwitch);
+}
 
 bool listenSwitch()
 {
@@ -202,7 +206,9 @@ void exeCommand()
 
 int main()
 {
+    
     printProfiles();
+    createThreads();
 
     short *countinfo = new short[3]{countStart};
     studied.stop();
@@ -235,6 +241,6 @@ int main()
     // }
     // loopCount++;
 }
-    ifenter.detach(); 
-	swich.detach();
+    ifenter->detach(); 
+	swich->detach();
 }

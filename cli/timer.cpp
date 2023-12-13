@@ -3,6 +3,7 @@
 #include <sstream>
 
 #include "timer.h"
+#include "profiles.h"
 
 timer::timer()
     :hrs(0), min(0), sec(0)
@@ -149,7 +150,14 @@ void varTime::update()
 std::string printnget(const char * data,const unsigned int & size, timer* times)
 {   // [Optimisable?]
     std::stringstream ey;
-    ey << " Today's sits :- \n      Duration         Time Worked   Not Worked        Sits \n";
+
+    for(short i = 0; i<=(30 - (CurrentProfile().length()/2)) ; i++)
+    {
+        ey << " ";
+    }
+
+    ey << CurrentProfile();
+    ey << "\n\n Today's sits :- \n      Duration         Time Worked   Not Worked        Sits \n";
 
     if(size){
     for(unsigned int i = 0; i<size;i = i + 45)

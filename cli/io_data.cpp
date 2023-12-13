@@ -4,6 +4,7 @@
 
 #include "io_data.h"
 #include "logs.h"
+#include "profiles.h"
 
 static std::string logs = "";
 
@@ -12,10 +13,7 @@ static char prefix[24];
 static bool isfirst = true;
 const std::string getHistory()
 {
-    stream.open("/home/dev/Documents/Studysaves.txt");
-    std::array<char,10> data;
-    bool _continue = true;
-    int loopcnt= 0;
+    stream.open(CurrentProfilePath());
     std::array<char,10> nowdate;
     std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     std::strftime(&nowdate[0],11, "%d-%m-%Y", std::localtime(&now));
@@ -41,25 +39,38 @@ const std::string getHistory()
     addLog(msg.c_str());
 // bad code ends
 
-//const std::string formatHistory(char* begin,const unsigned int size);
+    stream.seekg(0,std::ios::end);
+    unsigned int sze = stream.tellg();
+    std::array<char,10> data;
 
-    while(_continue)
-    {
-        stream.seekp((-45*(loopcnt+1)),std::ios::end);
-        stream.read(&data[0],10);
+    int loopcnt= 0;
 
-        if(data == nowdate) {
+    while(true)
+    { 
+        if((loopcnt + 1)*45 <= sze){
+            stream.seekg((-45*(loopcnt+1)),std::ios::end);
+        }
+        else { 
+            break;
+        }
+
+        stream.read(data.begin(),10);
+
+        if(data == nowdate && (loopcnt + 1)*45 <= sze) {
             loopcnt++;
         }
         else{
-             _continue = false;
+             break;
         }  
     }
-    stream.seekp(-45*(loopcnt),std::ios::end);
+
+    stream.seekg(-45*(loopcnt),std::ios::end);
+
     char to_return[(45*loopcnt)+1];
     stream.read(&to_return[0],45*loopcnt);
-    stream.close();
     to_return[(45*loopcnt)] = '\0';
+
+    stream.close();
     return to_return;
 }
 
@@ -72,7 +83,7 @@ void noteinfo()
 void savestate(const std::string& stime)
 {
     char nowde[14];
-    stream.open("/home/dev/Documents/Studysaves.txt");
+    stream.open(CurrentProfilePath());
     if(isfirst){
         stream.seekg(0,std::ios::end);
         isfirst = false;
@@ -88,7 +99,7 @@ void savestate(const std::string& stime)
 
 void saveexplictTime(const std::string& tosave)
 {
-    stream.open("/home/dev/Documents/Studysaves.txt");
+    stream.open(CurrentProfilePath());
     if(isfirst){
         stream.seekg(0,std::ios::end);
     }

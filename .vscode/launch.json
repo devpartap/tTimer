@@ -6,7 +6,7 @@
         "type": "lldb-vscode",
         "request": "launch",
         "program": "${workspaceFolder}/cli/tmprun/tTimer.app",
-        "args": [],
+        "args": ["runInTerminal"],
         "env": [
           {
             "description": "Enable pretty-printing for lldb",
