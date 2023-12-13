@@ -1,5 +1,3 @@
-cli/main
-cli/saves.txt
+.vscode/*
 
 cli/tmprun/
-.vscode/
