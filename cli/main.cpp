@@ -11,14 +11,12 @@
 #include "Libs/CppLinuxSerial/SerialPort.hpp"
 
 
-#define countStart 00,02,00 // format hh,mm,ss
+#define countStart 00,00,30 // format hh,mm,ss
 #define dupliTime 30 // time to duplicate main save filec
 
 using namespace std::chrono_literals;
 using namespace mn::CppLinuxSerial;
 
-varTime studied;
-varTime sittime;
 short loopCount = 1;
 bool switchState = true;
 bool studyState = false;
@@ -31,6 +29,9 @@ bool listenSwitch();
 
 std::thread* ifenter;
 std::thread* swich;
+
+varTime studied;
+varTime sittime;
 
 void createThreads(){
     ifenter = new std::thread(exeCommand);
@@ -207,17 +208,21 @@ void exeCommand()
 int main()
 {
     
+    studied.stop();
+    sittime.stop();
+
     printProfiles();
     createThreads();
 
     short *countinfo = new short[3]{countStart};
-    studied.stop();
 
     noteinfo();
     const std::string history = getHistory();
     
     to_print = printnget(&history[0],history.size(),times);
     bool towrite = false;
+
+    sittime.count();
 
     while(true){
     std::cout << to_print << std::endl;

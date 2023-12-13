@@ -151,13 +151,22 @@ std::string printnget(const char * data,const unsigned int & size, timer* times)
 {   // [Optimisable?]
     std::stringstream ey;
 
-    for(short i = 0; i<=(30 - (CurrentProfile().length()/2)) ; i++)
+    ey << "||";
+    short i = 0;
+    for(; i<=(28 - (CurrentProfile().length()/2)) ; i++)
     {
         ey << " ";
     }
 
-    ey << CurrentProfile();
-    ey << "\n\n Today's sits :- \n      Duration         Time Worked   Not Worked        Sits \n";
+    ey <<CurrentProfile();
+
+    for(short j = CurrentProfile().length() + i; j<57 ; j++)
+    {
+        ey << " ";
+    }
+
+
+    ey << "||\n\n Today's sits :- \n      Duration         Time Worked   Not Worked       Sits \n";
 
     if(size){
     for(unsigned int i = 0; i<size;i = i + 45)

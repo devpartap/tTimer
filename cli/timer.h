@@ -24,6 +24,7 @@ class varTime : public timer
 {
     bool ifcounting = true;
     std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
+    
 public:
     varTime();
     varTime(const short & h, const short & m, const short & s);

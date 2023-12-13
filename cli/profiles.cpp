@@ -74,7 +74,7 @@ void printProfiles()
         }
         cout << "\n" << profiles.size()+1 << ". " << "Create New Profile\n" << endl; 
 
-        int inp = 0;
+        int inp = 2;
         std::cin>>inp;
         std::cin.ignore();
 

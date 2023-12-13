@@ -11,6 +11,8 @@ static std::string logs = "";
 static std::fstream stream;
 static char prefix[24];
 static bool isfirst = true;
+
+
 const std::string getHistory()
 {
     stream.open(CurrentProfilePath());
@@ -18,32 +20,12 @@ const std::string getHistory()
     std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     std::strftime(&nowdate[0],11, "%d-%m-%Y", std::localtime(&now));
 
-//ik it's bad code but it's quick do to find how many days left...
-    short caltodate = 92;
-    short monthdays = 0;
-    if((int(nowdate[4] - '0') == 2))
-    {
-        monthdays = 31;
-    }
-    else if((int(nowdate[4] - '0') == 3))
-    {
-        monthdays = 31+28;
-    }
-
-    else if((int(nowdate[4] - '0') == 4))
-    {
-        monthdays = 31+28+31;
-    }
-
-    std::string msg = std::to_string(caltodate - (monthdays + (int(nowdate[0] - '0')*10) + int(nowdate[1] - '0'))) + " Days Left!!";
-    addLog(msg.c_str());
-// bad code ends
 
     stream.seekg(0,std::ios::end);
     unsigned int sze = stream.tellg();
-    std::array<char,10> data;
+    int loopcnt = 0;
 
-    int loopcnt= 0;
+    std::array<char,10> data;    
 
     while(true)
     { 
