@@ -1,5 +1,7 @@
 #include <string>
 
+#include "definations.h"
+
 #define logtimeout 5
 
 static std::string logs = "";

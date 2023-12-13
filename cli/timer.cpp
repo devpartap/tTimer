@@ -5,6 +5,8 @@
 #include "timer.h"
 #include "profiles.h"
 
+#include "definations.h"
+
 timer::timer()
     :hrs(0), min(0), sec(0)
 { }

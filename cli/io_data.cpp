@@ -6,6 +6,8 @@
 #include "logs.h"
 #include "profiles.h"
 
+#include "definations.h"
+
 static std::string logs = "";
 
 static std::fstream stream;

@@ -10,16 +10,15 @@
 #include "profiles.h"
 #include "Libs/CppLinuxSerial/SerialPort.hpp"
 
+#include "definations.h"
 
-#define countStart 00,00,30 // format hh,mm,ss
-#define dupliTime 30 // time to duplicate main save filec
 
 using namespace std::chrono_literals;
 using namespace mn::CppLinuxSerial;
 
 short loopCount = 1;
 bool switchState = true;
-bool studyState = false;
+bool workState = false;
 bool ledstate = false;
 
 bool runin = true;
@@ -39,7 +38,7 @@ varTime sittime;
 
 bool listenSwitch()
 {
-#ifdef _WIN32
+#ifndef __linux__
     return 0;
 #endif
 
@@ -69,22 +68,22 @@ bool listenSwitch()
         serialPort.Read(readData);
 		if(readData != "")
 		{
-            if(studyState)
+            if(workState)
             {
                 studied.stop();
                 addLog("Stopped Studing!");
-                studyState = false;
+                workState = false;
             }
             else 
             {
                 studied.count();
                 addLog("Started Studing!");
-                studyState = true;
+                workState = true;
             }
             readData = "";	
 		}
 
-        if(studyState == !ledstate)
+        if(workState == !ledstate)
         {
             serialPort.Write("b");
             ledstate = !ledstate;
@@ -104,17 +103,17 @@ void exeCommand()
         std::getline(std::cin,inputcom,'\n');
         if(inputcom == "")
         {
-            if(studyState)
+            if(workState)
             {
                 studied.stop();
                 addLog("Stopped Studing!");
-                studyState = false;
+                workState = false;
             }
             else 
             {
                 studied.count();
                 addLog("Started Studing!");
-                studyState = true;
+                workState = true;
             }
         }
 
@@ -211,13 +210,8 @@ int main()
     }
 
     std::this_thread::sleep_for(1s);
-    system("clear");
-    // if((loopCount%dupliTime == 0) && (towrite))
-    // {
-    //     system("cp /home/dev/Documents/Studysaves.txt /home/dev/Dropbox/Studysaves.txt");
-    //     loopCount = 1;
-    // }
-    // loopCount++;
+    __clearconsole;
+
     }
 
     // ifenter->detach(); 

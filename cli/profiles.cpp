@@ -5,6 +5,8 @@
 #include <fstream>
 #include <vector>
 
+#include "definations.h"
+
 #define pwait(x) cout << x << endl; getchar()//; std::cin.ignore()
 
 using std::cout, std::endl;
@@ -14,7 +16,7 @@ static std::filesystem::path _currentProfile_;
 
 void createNewProfile()
 {
-    system("clear");
+    __clearconsole;
 
     std::string profile_name = "";
     std::cout << "\n  Input New Profile Name(no extension) :- ";
@@ -42,7 +44,7 @@ void createNewProfile()
     ofstream.close();
     
     pwait("Profile Created, Press any key to continue ");
-    system("clear");
+    __clearconsole;
 
 }
 
@@ -95,7 +97,7 @@ void printProfiles()
             _currentProfile_.assign(profiles[inp-1]);
         }
 
-        system("clear");
+        __clearconsole;
 
     } while(reloop);
     
