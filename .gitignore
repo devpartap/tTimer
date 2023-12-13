@@ -2,3 +2,4 @@ cli/main
 cli/saves.txt
 
 cli/tmprun/
+.vscode/
