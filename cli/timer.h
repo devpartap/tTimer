@@ -15,9 +15,7 @@ public:
     timer operator+(const timer &obj);
     timer operator+(const std::string_view & data);
     timer operator-(const timer & obj);
-
     void synctime();
-    std::string getinstr();
 
     friend std::ostream& operator<<(std::ostream & os,const timer & obj);
 };
@@ -26,6 +24,7 @@ class varTime : public timer
 {
     bool ifcounting = true;
     std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
+    
 public:
     varTime();
     varTime(const short & h, const short & m, const short & s);

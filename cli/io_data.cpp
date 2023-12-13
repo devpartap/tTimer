@@ -3,41 +3,58 @@
 #include <array>
 
 #include "io_data.h"
+#include "logs.h"
+#include "profiles.h"
+
+#include "definations.h"
+
+static std::string logs = "";
 
 static std::fstream stream;
 static char prefix[24];
 static bool isfirst = true;
+
+
 const std::string getHistory()
 {
-    stream.open("saves.txt");
-    
-    std::array<char,10> data;
-    bool _continue = true;
-    int loopcnt= 0;
+    stream.open(CurrentProfilePath());
     std::array<char,10> nowdate;
     std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     std::strftime(&nowdate[0],11, "%d-%m-%Y", std::localtime(&now));
-    //const std::string formatHistory(char* begin,const unsigned int size);
-    
-    while(_continue)
-    {
-        stream.seekp((-45*(loopcnt+1)),std::ios::end);
-        //stream.seekp(0);
-        stream.read(&data[0],10);
 
-        if(data == nowdate) {
+
+    stream.seekg(0,std::ios::end);
+    unsigned int sze = stream.tellg();
+    int loopcnt = 0;
+
+    std::array<char,10> data;    
+
+    while(true)
+    { 
+        if((loopcnt + 1)*45 <= sze){
+            stream.seekg((-45*(loopcnt+1)),std::ios::end);
+        }
+        else { 
+            break;
+        }
+
+        stream.read(data.begin(),10);
+
+        if(data == nowdate && (loopcnt + 1)*45 <= sze) {
             loopcnt++;
         }
         else{
-             _continue = false;
+             break;
         }  
     }
 
-    stream.seekp(-45*(loopcnt),std::ios::end);
+    stream.seekg(-45*(loopcnt),std::ios::end);
+
     char to_return[(45*loopcnt)+1];
     stream.read(&to_return[0],45*loopcnt);
-    stream.close();
     to_return[(45*loopcnt)] = '\0';
+
+    stream.close();
     return to_return;
 }
 
@@ -50,7 +67,7 @@ void noteinfo()
 void savestate(const std::string& stime)
 {
     char nowde[14];
-    stream.open("saves.txt");
+    stream.open(CurrentProfilePath());
     if(isfirst){
         stream.seekg(0,std::ios::end);
         isfirst = false;
@@ -64,4 +81,20 @@ void savestate(const std::string& stime)
     stream.close();
 }
 
+void saveexplictTime(const std::string& tosave)
+{
+    stream.open(CurrentProfilePath());
+    if(isfirst){
+        stream.seekg(0,std::ios::end);
+    }
+    else 
+    {
+        stream.seekg(-45,std::ios::end);
+    }
+    isfirst = true;
 
+    stream << prefix[0] << prefix[1]<< prefix[2]<< prefix[3]<< prefix[4]<< prefix[5]<< prefix[6]<< prefix[7]<< prefix[8]<< prefix[9];
+    stream << tosave;
+    stream.close();
+    
+}

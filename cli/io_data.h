@@ -7,3 +7,5 @@
 const std::string getHistory();
 void noteinfo();
 void savestate(const std::string &stime);
+void saveexplictTime(const std::string& tosave);
+

@@ -3,6 +3,9 @@
 #include <sstream>
 
 #include "timer.h"
+#include "profiles.h"
+
+#include "definations.h"
 
 timer::timer()
     :hrs(0), min(0), sec(0)
@@ -87,7 +90,6 @@ timer varTime::operator-(varTime& obj)
     if(obj.ifcounting) obj.update();
     return timer::operator-(obj);
 }
-
 std::ostream& operator<<(std::ostream & os,const timer & obj)
 {
     (obj.hrs > 9) ? (os << obj.hrs) : (os << 0 << obj.hrs); os << ":";
@@ -133,6 +135,7 @@ void varTime::stop()
     update();
     ifcounting = false;
 }
+
 void varTime::update()
 {
     if(ifcounting){
@@ -149,12 +152,27 @@ void varTime::update()
 std::string printnget(const char * data,const unsigned int & size, timer* times)
 {   // [Optimisable?]
     std::stringstream ey;
-    ey << " Today's sits :- \n      Duration         Time Studied  Not Studied      Sits \n";
+
+    ey << "||";
+    short i = 0;
+    for(; i<=(28 - (CurrentProfile().length()/2)) ; i++)
+    {
+        ey << " ";
+    }
+
+    ey <<CurrentProfile();
+
+    for(short j = CurrentProfile().length() + i; j<57 ; j++)
+    {
+        ey << " ";
+    }
+
+
+    ey << "||\n\n Today's sits :- \n      Duration         Time Worked   Not Worked       Sits \n";
 
     if(size){
     for(unsigned int i = 0; i<size;i = i + 45)
     {
-        
         timer from = std::string_view(&data[i+12],8);
         timer to = std::string_view(&data[i+23],8);
         timer studied = std::string_view(&data[i+36],8);
@@ -165,12 +183,12 @@ std::string printnget(const char * data,const unsigned int & size, timer* times)
         times[2] = times[2] + duration;       
     }
     times[1] = times[2] - times[0];
-
     }
     else
     {
         ey << "         --                 --           --            --\n";
     }
+    
     return ey.str();
 }
 
