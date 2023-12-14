@@ -11,7 +11,7 @@ Make sure you have gcc or clang or any of your c++ compilers installed.
     `git clone https://github.com/devpartap/tTimer.git ` 
     
 2. Go to the cli folder \
-    ` cd cli `
+    ` cd tTimer/cli `
     
 3. Build the project \
     For Linux :- `./install_linux.sh ` \
