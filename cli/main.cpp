@@ -143,7 +143,7 @@ void exeCommand()
                 times[1] = times[1] + nst;
                 times[2] = times[2] + totalsit;
 
-                pss << timer(et) - totalsit << " => " << et << "  -  " << st << "     " << nst << "    | " << totalsit << '\n';
+                pss << " " <<timer(et) - totalsit << " => " << et << "  -  " << st << "     " << nst << "    | " << totalsit << '\n';
                 ss  << " [" << timer(et) - totalsit << " - " << et << "] => " << st << '\n';     
 
                 to_print += pss.str();
@@ -198,8 +198,8 @@ int main()
 
     while(runin){
     std::cout << to_print << std::endl;
-    std::cout << "         Today Total  :- " << studied + times[0]  << "     " << (sittime - studied) + times[1] << "    | " << sittime + times[2]<< std::endl;    
-    std::cout << "         Currently    :- " << studied << "     " << sittime - studied  << "    | " << sittime << std::endl;
+    std::cout << "          Today Total  :- " << studied + times[0]  << "     " << (sittime - studied) + times[1] << "    | " << sittime + times[2]<< std::endl;    
+    std::cout << "          Currently    :- " << studied << "     " << sittime - studied  << "    | " << sittime << std::endl;
     std::cout << '\n' << viewLogs();
 
     if(towrite){

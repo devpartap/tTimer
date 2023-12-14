@@ -153,7 +153,7 @@ std::string printnget(const char * data,const unsigned int & size, timer* times)
 {   // [Optimisable?]
     std::stringstream ey;
 
-    ey << "||";
+    ey << " ||";
     short i = 0;
     for(; i<=(28 - (CurrentProfile().length()/2)) ; i++)
     {
@@ -167,8 +167,7 @@ std::string printnget(const char * data,const unsigned int & size, timer* times)
         ey << " ";
     }
 
-
-    ey << "||\n\n Today's sits :- \n      Duration         Time Worked   Not Worked       Sits \n";
+    ey << " ||\n\n Today's sits :- \n       Duration         Time Worked   Not Worked       Sits \n";
 
     if(size){
     for(unsigned int i = 0; i<size;i = i + 45)
@@ -178,7 +177,7 @@ std::string printnget(const char * data,const unsigned int & size, timer* times)
         timer studied = std::string_view(&data[i+36],8);
         timer duration = to - from;
 
-        ey << from << " => " <<  to << "  -  " << studied << "     " << (duration - studied) << "    | " << duration << "\n";
+        ey << " " << from << " => " <<  to << "  -  " << studied << "     " << (duration - studied) << "    | " << duration << "\n";
         times[0] = times[0] + studied;
         times[2] = times[2] + duration;       
     }
@@ -186,7 +185,7 @@ std::string printnget(const char * data,const unsigned int & size, timer* times)
     }
     else
     {
-        ey << "         --                 --           --            --\n";
+        ey << "          --                 --           --            --\n";
     }
     
     return ey.str();

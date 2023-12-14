@@ -11,7 +11,9 @@
 
 using std::cout, std::endl;
 
-static std::filesystem::path _profileDir_ = std::filesystem::current_path() / "profiles";
+#ifdef __linux__
+    static std::filesystem::path _profileDir_ = std::filesystem::current_path() / ".config/tTimer";
+#endif
 static std::filesystem::path _currentProfile_;
 
 void createNewProfile()
@@ -31,8 +33,6 @@ void createNewProfile()
         }
     }
     profile_name += ".txt";
-    cout << profile_name << endl;
-
 
     if(!std::filesystem::exists(_profileDir_))
     {
@@ -50,15 +50,16 @@ void createNewProfile()
 
 void printProfiles()
 {
-    if(!std::filesystem::exists(_profileDir_) || std::filesystem::is_empty(_profileDir_))
-    {
-        pwait("\n  You currently have no profile, press any key to create a profile ");
-        createNewProfile();
-    }
-
-
     bool reloop;
     do {
+        if(!std::filesystem::exists(_profileDir_) || std::filesystem::is_empty(_profileDir_))
+        {
+            pwait("\n  You currently have no profile, press any key to create a profile ");
+            createNewProfile();
+        }
+
+
+    
         reloop = false;
         std::vector<std::filesystem::path> profiles;
 
@@ -72,15 +73,17 @@ void printProfiles()
 
         for(u_int i = 1;i<=profiles.size();i++)
         {
-            cout << i << ". " << profiles[i-1].stem() << endl; 
+            cout << "  " << i << ". " << profiles[i-1].stem() << endl; 
         }
-        cout << "\n" << profiles.size()+1 << ". " << "Create New Profile\n" << endl; 
+        cout << "\n  " << profiles.size()+1 << ". " << "Create New Profile" << endl; 
+        cout << "  "   <<  profiles.size()+2 << ". " << "Delete a Profile\n" << endl; 
 
+        cout << "Input :- ";
         int inp = 0;
         std::cin>>inp;
         std::cin.ignore();
 
-        if(inp > profiles.size()+1 || inp <= 0)
+        if(inp > profiles.size()+2 || inp <= 0)
         {
             pwait("\n  Invalid Input!");
             reloop = true;
@@ -90,7 +93,18 @@ void printProfiles()
         {
             createNewProfile();
             reloop = true;
-        }    
+        } 
+
+        else if(inp == profiles.size()+2)
+        {
+            cout << "  [WARNING: All enteries of the profile will be deleated]\n  Input Profile Index to remove from above:- ";
+            int rminp;
+            std::cin>>rminp;
+            std::cin.ignore();
+
+            std::filesystem::remove(profiles[rminp-1]);
+            reloop = true;
+        }       
 
         else
         {

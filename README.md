@@ -14,6 +14,10 @@ Make sure you have gcc or clang or any of your c++ compilers installed.
     ` cd cli `
     
 3. Build the project \
+    For Linux :- `./install_linux.sh ` \
+    For Windows :- `install_windows.bat ` 
+
+        To Build yourself \
     ` clang++ -std=c++20 -O3 main.cpp timer.cpp io_data.cpp logs.cpp profiles.cpp Libs/CppLinuxSerial/SerialPort.cpp -lstdc++ -o tTimer` \
                                         or \
     ` gcc -std=c++20 -O3 main.cpp timer.cpp io_data.cpp logs.cpp profiles.cpp Libs/CppLinuxSerial/SerialPort.cpp -lstdc++ -o tTimer` 
