@@ -1,3 +1,5 @@
+exec bash
+
 
 st=false
 

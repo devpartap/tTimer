@@ -11,9 +11,12 @@
 
 using std::cout, std::endl;
 
-#ifdef __linux__
+#if defined(__linux__) || defined(__APPLE__)
     static std::filesystem::path _profileDir_ = std::filesystem::current_path() / ".config/tTimer";
+#elif defined(_WIN32) || defined(_WIN64)
+    static std::filesystem::path _profileDir_ = std::filesystem::current_path() / "Documents/tTimer";
 #endif
+
 static std::filesystem::path _currentProfile_;
 
 void createNewProfile()

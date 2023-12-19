@@ -15,7 +15,8 @@ Make sure you have gcc or clang or any of your c++ compilers installed.
     
 3. Build the project \
     For Linux :- `./install_linux.sh ` \
-    For Windows :- `install_windows.bat ` 
+    For Windows :- `install_windows.bat `\
+    For Mac :- `install_mac.zsh `
 
         To Build yourself \
     ` clang++ -std=c++20 -O3 main.cpp timer.cpp io_data.cpp logs.cpp profiles.cpp Libs/CppLinuxSerial/SerialPort.cpp -lstdc++ -o tTimer` \
