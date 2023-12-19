@@ -15,7 +15,7 @@ Make sure you have gcc or clang or any of your c++ compilers installed.
     
 3. Build the project \
     For Linux :- `./install_linux.sh ` \
-    For Windows :- `install_windows.bat `\
+    For Windows :- `install_windows.bat ` \
     For Mac :- `install_mac.zsh `
 
         To Build yourself \
